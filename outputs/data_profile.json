@@ -1,0 +1,12 @@
+{
+  "column_count": 31,
+  "dataset_days": 1.9999074074074075,
+  "duplicate_rows": 1081,
+  "fraud_rate": 0.001727485630620034,
+  "fraud_transactions": 492,
+  "legitimate_transactions": 284315,
+  "missing_cells": 0,
+  "row_count": 284807,
+  "time_max_seconds": 172792.0,
+  "time_min_seconds": 0.0
+}

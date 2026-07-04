@@ -1,0 +1,7 @@
+{
+  "random_state": 42,
+  "resampling_method": "Random oversampling fallback",
+  "selected_model": "Tree model with Random oversampling fallback",
+  "test_fraud_rows": 123,
+  "test_rows": 71202
+}
