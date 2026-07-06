@@ -64,7 +64,6 @@ explicit by scoring thresholds with:
 
 ```text
 data-sources.md                 # dataset attribution, caveats, setup
-docs/explain-it-to-me.md        # beginner-friendly explanation
 notebooks/fraud_risk_analysis.ipynb
 outputs/                        # generated tables, metrics, and notes
 reports/
@@ -111,12 +110,72 @@ python -m venv .venv
 pip install -r requirements.txt
 pip install -e .
 
-python scripts/download_data.py --archive path/to/archive.zip
 python scripts/run_all.py
+python scripts/run_sql.py
 pytest
 ```
 
 On macOS/Linux, activate with `source .venv/bin/activate`.
+
+The full raw file and a smaller stratified sample are included in `data/`.
+`scripts/download_data.py` remains available only if you want to rebuild from a
+fresh Kaggle archive.
+
+## SQL and Power BI layer
+
+The [sql/](sql) folder is the reproducible validation and KPI layer. It checks
+the included transaction data, computes class balance, amount-band risk,
+fraud-by-hour cuts, threshold economics, and scenario comparisons.
+
+```bash
+python scripts/run_sql.py
+```
+
+The runner uses the full raw file when present and exports dashboard-ready data
+to `data/powerbi/`: class balance, amount by class, fraud by hour, amount-band
+risk, threshold cost table, model metrics, precision-recall curve, deployment
+scenarios, and cost assumptions. The [power-bi/](power-bi) folder contains a
+dashboard brief, data model, DAX, refresh steps, manual build instructions, and
+mockups. No `.pbix` is included yet; I did not create a placeholder.
+
+## Portfolio Use
+
+**CV bullets**
+
+- Built a fraud detection and risk-strategy project on the 284,807-row
+  Kaggle/ULB credit-card fraud benchmark, optimizing around PR-AUC and
+  threshold economics rather than accuracy.
+- Translated model performance into fraud operations decisions: alert volume,
+  precision, recall, false positives, and expected net savings per 100K
+  transactions.
+- SQL-focused: Added DuckDB validation and KPI views for class balance,
+  amount-band risk, hourly fraud patterns, threshold rankings, and README
+  claim checks.
+- Power BI-focused: Prepared dashboard-ready data and a three-page fraud
+  operations dashboard build spec.
+
+**LinkedIn description**
+
+> Transaction Fraud Detection & Risk Strategy - I built this to show that fraud
+> modeling is an operating decision, not just a classifier. Python trains and
+> evaluates the model, SQL validates the cuts and exports threshold economics,
+> and Power BI is documented as the stakeholder dashboard for choosing a review
+> policy.
+
+**Interview explanation**
+
+> "The important part is the threshold decision. I used Python for modeling,
+> SQL for reproducible validation and KPI exports, and Power BI as the
+> stakeholder view of precision, recall, review volume, and cost."
+
+**Likely interview questions**
+
+1. *Why focus on PR-AUC?* Fraud is extremely imbalanced, so ROC-AUC can look
+   strong while precision is operationally weak.
+2. *How did you choose the threshold?* I compared thresholds under explicit
+   cost assumptions and selected the best net-savings tradeoff.
+3. *What would a production version need?* Merchant, device, customer,
+   geography, and time-based features, plus drift monitoring.
 
 ## Limitations
 

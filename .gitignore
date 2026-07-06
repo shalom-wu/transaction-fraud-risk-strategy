@@ -25,6 +25,11 @@ pytest-cache-files-*/
 .mypy_cache/
 .ruff_cache/
 .coverage
+data/powerbi/tmp_*.csv
+
+# Internal prep docs
+explainer-guide/
+docs/explain-it-to-me.md
 
 # IDE / OS
 .vscode/

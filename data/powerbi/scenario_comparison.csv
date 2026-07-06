@@ -1,0 +1,4 @@
+scenario,threshold,alerts,precision,recall,false_positive_rate,net_savings_per_100k,use_case
+Cost-balanced default,0.25,134.0,0.7835820895522388,0.8536585365853658,0.0004079967360261118,14543.446462178032,Use as the recommended operating point under the default cost assumptions.
+Aggressive review,0.05,355.0,0.30422535211267604,0.8780487804878049,0.003475006682705159,10297.85364175164,Maximize fraud capture when review capacity and customer messaging can absorb more alerts.
+Conservative flagging,0.9869070456308583,36.0,1.0,0.2926829268292683,0.0,4557.414117580968,Prioritize customer experience by flagging fewer legitimate transactions.

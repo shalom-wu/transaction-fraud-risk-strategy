@@ -1,0 +1,2 @@
+data_basis,transactions,fraud_transactions,fraud_rate,total_amount,fraud_amount
+"full raw file (284,807 rows)",284807,492,0.001727,25162590.01,60127.97

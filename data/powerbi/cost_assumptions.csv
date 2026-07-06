@@ -1,0 +1,2 @@
+fraud_loss_multiplier,chargeback_fee,review_cost_per_alert,false_positive_fixed_cost,false_positive_amount_rate,current_state_detection_rate
+1.0,15.0,3.0,5.0,0.025,0.0
