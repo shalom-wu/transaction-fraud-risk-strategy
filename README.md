@@ -1,22 +1,10 @@
 # Transaction Fraud Detection & Risk Strategy
 
-**How should a card issuer use fraud scores without quietly damaging good
-customers?** This project uses the public Kaggle/ULB credit card fraud dataset
-to build a fraud detection pipeline, then turns the model into a threshold and
-deployment strategy. The business problem is not "catch every fraud"; it is
-balancing direct fraud loss against false positives: blocked legitimate
-transactions, manual review, customer friction, and churn risk.
+This repository builds a fraud scoring workflow on the public Kaggle/ULB credit card fraud dataset. The focus is threshold selection: fraud captured, false positives, review volume, customer friction, and expected cost.
 
-**Dataset:** public [Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud)
-dataset from the Machine Learning Group at Universite Libre de Bruxelles.
-It is a well-known benchmark dataset with anonymized European card
-transactions. Features `V1` through `V28` are PCA-anonymized, so the project is
-explicit about limited interpretability and does not overstate feature-level
-"why" findings.
+**Dataset:** public [Credit Card Fraud Detection](https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud) dataset from the Machine Learning Group at Universite Libre de Bruxelles. Features `V1` through `V28` are PCA-anonymized, so the project does not make merchant-, device-, or geography-level driver claims.
 
-## Key findings
-
-- **Fraud is only 0.173% of transactions**: 492 frauds out of 284,807 rows.
+## Key findings- **Fraud is only 0.173% of transactions**: 492 frauds out of 284,807 rows.
   There are no missing cells; the file contains 1,081 exact duplicate rows,
   which are documented rather than silently dropped because repeated
   transaction-looking records can be business-real in payments data.
@@ -46,7 +34,7 @@ Read these generated artifacts first:
 
 ![Threshold tradeoff](reports/figures/threshold_tradeoff.png)
 
-## Why this matters
+## Operating decision
 
 Fraud projects often stop after a classification metric. That misses the
 actual operating decision. Under severe imbalance, a model can look good on
@@ -137,45 +125,6 @@ risk, threshold cost table, model metrics, precision-recall curve, deployment
 scenarios, and cost assumptions. The [power-bi/](power-bi) folder contains a
 dashboard brief, data model, DAX, refresh steps, manual build instructions, and
 mockups. No `.pbix` is included yet; I did not create a placeholder.
-
-## Portfolio Use
-
-**CV bullets**
-
-- Built a fraud detection and risk-strategy project on the 284,807-row
-  Kaggle/ULB credit-card fraud benchmark, optimizing around PR-AUC and
-  threshold economics rather than accuracy.
-- Translated model performance into fraud operations decisions: alert volume,
-  precision, recall, false positives, and expected net savings per 100K
-  transactions.
-- SQL-focused: Added DuckDB validation and KPI views for class balance,
-  amount-band risk, hourly fraud patterns, threshold rankings, and README
-  claim checks.
-- Power BI-focused: Prepared dashboard-ready data and a three-page fraud
-  operations dashboard build spec.
-
-**LinkedIn description**
-
-> Transaction Fraud Detection & Risk Strategy - I built this to show that fraud
-> modeling is an operating decision, not just a classifier. Python trains and
-> evaluates the model, SQL validates the cuts and exports threshold economics,
-> and Power BI is documented as the stakeholder dashboard for choosing a review
-> policy.
-
-**Interview explanation**
-
-> "The important part is the threshold decision. I used Python for modeling,
-> SQL for reproducible validation and KPI exports, and Power BI as the
-> stakeholder view of precision, recall, review volume, and cost."
-
-**Likely interview questions**
-
-1. *Why focus on PR-AUC?* Fraud is extremely imbalanced, so ROC-AUC can look
-   strong while precision is operationally weak.
-2. *How did you choose the threshold?* I compared thresholds under explicit
-   cost assumptions and selected the best net-savings tradeoff.
-3. *What would a production version need?* Merchant, device, customer,
-   geography, and time-based features, plus drift monitoring.
 
 ## Limitations
 
